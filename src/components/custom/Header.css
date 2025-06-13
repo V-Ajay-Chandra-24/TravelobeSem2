@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] */
+
+
+:root{
+    --primary-dark:#228325;
+    --primary-light: #50e350;
+}
+
+.icon{
+    color : var(--primary-dark);
+}
+
+@layer base {
+    
+    li {
+        @apply p-4 flex items-center 
+    }
+
+    /* h1 {
+        @apply text-3xl
+    } */
+
+    /* h2 {
+        @apply text-3xl font-bold font-[Poppins]
+    }
+
+    h3 {
+        @apply text-xl font-bold
+    } */
+
+    /* button {
+        @apply p-3 border  text-white rounded-md cursor-pointer
+    } */
+/* 
+    .icon {
+        @apply text-2xl cursor-pointer
+    } */
+
+}

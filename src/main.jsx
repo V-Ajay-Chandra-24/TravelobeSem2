@@ -7,6 +7,7 @@ import { RouterProvider } from 'react-router'
 import CreateTrip from './create-trip'
 import Header from './components/custom/Header'
 import { Toaster } from './components/ui/sonner'
+import NavBar from './components/custom/NavBar'
 
 const router = createBrowserRouter([
   {
