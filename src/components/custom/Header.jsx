@@ -15,7 +15,7 @@ import {
   FaPinterest,
   FaYoutube,
 } from "react-icons/fa";
-import "./Header.css";
+
 
 function Header() {
   const [nav, setNav] = useState(false);
@@ -33,12 +33,12 @@ function Header() {
     //   </div>
     // </div>
 
-    <div className="flex w-[100%] justify-between items-center h-20 px-4  absolute z-10 text-black bg-white ">
+    <div className="flex w-[100%] justify-between items-center h-20 px-4   text-black bg-white shadow-sm">
       <div>
         {/* <h2 onClick={handleNav} className={logo ? "hidden" : "block"}>
           Travelobe
         </h2> */}
-        <img src="TravelobeLogo.png" alt="Logo" className="w-45 h-12" />
+        <img src="TravelobeLogo.png" alt="Logo" className="w-45 h-12"/>
       </div>
       <ul className="hidden md:flex ">
         <li className="hover:text-green-600 p-4 flex items-center">
@@ -67,16 +67,23 @@ function Header() {
         </li>
       </ul>
 
-      <div className="hidden  md:flex ">
+      <div className="hidden  md:flex gap-3">
         {/* <BiSearch className="mr-2" size={20} />
         <BsPerson size={20} /> */}
 
-        <button className="mr-2  text-white bg-black border-2 font-medium hover:text-green-400 hover:border-green-400 cursor-pointer p-3 border  text-white rounded-md cursor-pointer">
+        {/* <button className="mr-2  text-white bg-black border-2 font-medium hover:text-green-400 hover:border-green-400 cursor-pointer  border  text-white rounded-md cursor-pointer h-10">
           Log In
-        </button>
-        <button className="border-green-400 text-green-400 border-2  font-medium hover:text-black hover:border-black cursor-pointer p-3 border  text-green-400 rounded-md cursor-pointer">
+        </button> */}
+        <Button>
+          Login
+        </Button>
+
+        <Button>
+          Sign Up
+        </Button>
+        {/* <button className="border-green-400 text-green-400 border-2  font-medium hover:text-black hover:border-black cursor-pointer p-3 border  text-green-400 rounded-md cursor-pointer">
           SignUp
-        </button>
+        </button> */}
       </div>
 
       {/* Hamburger */}
@@ -89,13 +96,12 @@ function Header() {
         onClick={handleNav}
         className={
           nav
-            ? "absolute text-black left-[0] top-0 w-full bg-gray-100 px-4 py-7 flex-col"
+            ? "absolute text-black left-[0] top-0 w-full bg-gray-100/90 px-4 py-7 flex-col"
             : "absolute left-[-100%] top-0 w-full bg-gray-100/90 px-4 py-7 flex-col"
         }
       >
         <ul>
-          {/* <h2>Travelobe</h2> */}
-          <img src="TravelobeLogo.png" alt="Logo" className="w-45 h-12" />
+          <h2>Travelobe</h2>
           <li className="border-b p-4 flex items-center ">
             <a href="">Home</a>
           </li>
@@ -109,20 +115,16 @@ function Header() {
             <a href="">Chat</a>
           </li>
           <div className=" flex flex-col ">
-            <button className="my-2 bg-black p-3 border  text-white rounded-md cursor-pointer">
-              Log In
-            </button>
-            <button className="mt-2 bg-black p-3 border  text-white rounded-md cursor-pointer">
-              Sign Up
-            </button>
+            <button className="my-2 bg-black p-3 border  text-white rounded-md cursor-pointer">Log In</button>
+            <button className="mt-2 bg-black p-3 border  text-white rounded-md cursor-pointer">Sign Up</button>
           </div>
 
-          <div className=" flex justify-between my-6 text-green-600">
-            <FaFacebook className="text-2xl cursor-pointer " />
-            <FaTwitter className="text-2xl cursor-pointer" />
-            <FaInstagram className="text-2xl cursor-pointer" />
-            <FaPinterest className="text-2xl cursor-pointer" />
-            <FaYoutube className="text-2xl cursor-pointer" />
+          <div className=" flex justify-between my-6">
+            <FaFacebook className="icon" />
+            <FaTwitter className="icon" />
+            <FaInstagram className="icon" />
+            <FaPinterest className="icon" />
+            <FaYoutube className="icon" />
           </div>
         </ul>
       </div>

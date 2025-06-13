@@ -1,95 +1,82 @@
+
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY
 const genAI = new GoogleGenerativeAI(apiKey); 
+ 
+    export const generationConfig = {
+      temperature: 1,
+      topP: 0.95,
+      topK: 40,
+      maxOutputTokens: 8192,
+      responseMimeType: 'application/json', 
+    };
 
-
-export const generationConfig = {
-  temperature: 1,           
-  topP: 0.95,                 
-  topK: 64,                  
-  maxOutputTokens: 8192,      
-  responseMimeType: "application/json", 
-};
-
-// Model configuration
+    // Model configuration
 const model = genAI.getGenerativeModel({ 
-  model: "gemini-2.0-flash",
+  model: "gemini-1.5-flash",
    
 });
 
-
-
-// Start chat session with history
-export const chatSession = model.startChat({
-  generationConfig,
-  history: [
-    {
-      role: "user",
-      parts: [{
-        text: `Generate a 3-day Las Vegas travel plan for couples on a budget.
-        Include:
-        - Hotel options with name, address, price, image URL, coordinates, rating, description
-        - Daily itinerary with place name, details, image URL, coordinates, pricing, rating, duration
-        - Format response as valid JSON`
-      }]
-    },
-    {
-      role: "model",
-      parts: [{
-        text: `\`\`\`json
-{
-  "travelPlan": {
-    "hotels": [
-      {
-        "hotelName": "The D Las Vegas",
-        "hotelAddress": "301 Fremont Street, Las Vegas, NV 89101",
-        "price": "$50-$100 per night",
-        "hotelImageUrl": "https://www.theDcasino.com/images/hero/main-hero-02.jpg",
-        "geoCoordinates": {
-          "latitude": 36.1695,
-          "longitude": -115.1438
-        },
-        "rating": 3.5,
-        "description": "A budget-friendly hotel located in downtown Las Vegas with retro decor and modern amenities. Close to Fremont Street Experience."
-      },
-      {
-        "hotelName": "Circus Circus Hotel & Casino",
-        "hotelAddress": "2880 S Las Vegas Blvd, Las Vegas, NV 89109",
-        "price": "$40-$90 per night",
-        "hotelImageUrl": "https://example.com/circus-circus.jpg",
-        "geoCoordinates": {
-          "latitude": 36.1350,
-          "longitude": -115.1680
-        },
-        "rating": 3.0,
-        "description": "Family-friendly budget option with circus acts and amusement park. North Strip location."
-      }
-    ],
-    "itinerary": {
-      "day1": [
+    export const chatSession = model.startChat({
+      generationConfig,
+      history: [
         {
-          "placeName": "Fremont Street Experience",
-          "details": "Free light shows and street performers",
-          "imageUrl": "https://example.com/fremont.jpg",
-          "coordinates": {
-            "latitude": 36.1706,
-            "longitude": -115.1450
-          },
-          "pricing": "Free",
-          "rating": 4.7,
-          "duration": "2-3 hours"
+          role: 'user',
+          parts: [
+            { 
+              text: 'Generate Travel Plan for Location: Las Vegas, for 3 Days for Couple with a Cheap budget. ' +
+                    'Provide hotel options with: HotelName, Hotel address, Price, hotel image url, geo coordinates (as latitude/longitude object), rating (1-5), descriptions. ' +
+                    'Also suggest itinerary with: placeName, Place Details, Place Image Url, Geo Coordinates (as latitude/longitude object), ticket Pricing, rating (1-5), ' +
+                    'time travel (duration), and best time to visit for each day. Format response as pure JSON without markdown code blocks.'
+            },
+          ],
+        },
+        {
+          role: 'model',
+          parts: [
+            { 
+              text: JSON.stringify({
+                travelPlan: {
+                  location: "Las Vegas",
+                  duration: "3 Days",
+                  budget: "Cheap",
+                  hotels: [
+                    {
+                      hotelName: "Flamingo Las Vegas",
+                      address: "3555 S Las Vegas Blvd",
+                      price: "$40-$150/night",
+                      imageUrl: "https://example.com/flamingo.jpg",
+                      geoCoordinates: { latitude: 36.1162, longitude: -115.1706 },
+                      rating: 3.5,
+                      description: "Iconic hotel with great pool and central location"
+                    }
+                  ],
+                  itinerary: {
+                    day1: [
+                      {
+                        placeName: "Bellagio Fountains",
+                        details: "Famous water show",
+                        imageUrl: "https://example.com/fountains.jpg",
+                        coordinates: { latitude: 36.1126, longitude: -115.1741 },
+                        pricing: "Free",
+                        rating: 4.8,
+                        duration: "30 minutes",
+                        bestTime: "Evening"
+                      }
+                    ]
+                  }
+                }
+              })
+            }
+          ],
         }
       ],
-      "day2": [
-        // Additional itinerary items
-      ]
-    }
-  }
-}
-\`\`\``
-      }]
-    }
-  ]
-});
+    });
+
+
+    
+   
+
+
 
